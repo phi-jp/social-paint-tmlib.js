@@ -22,9 +22,11 @@
     };
 
     var initSocketIO = function() {
-        socket  = io.connect('http://'+location.host+':3001/');
+        socket  = io.connect('http://'+location.host+':'+port);
         console.log('http://'+location.host+'/');
     };
+
+
 
     tm.main(function() {
         initCanvas();
@@ -47,6 +49,8 @@
             canvas.drawLine(x, y, e.pointX, e.pointY);
             send("move", x, y, e.pointX, e.pointY, color);
             x = e.pointX; y = e.pointY;
+
+            e.stop();
         });
         element.event.pointend(function() {
             touch = false;
@@ -66,6 +70,8 @@
             canvas.strokeStyle = e.data.color;
             canvas.drawLine(d.startX, d.startY, d.endX, d.endY);
         });
+
+        window.scrollTo(0,0);
     });
 
 })();
