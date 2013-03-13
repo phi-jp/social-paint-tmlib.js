@@ -43,15 +43,19 @@ var io = require('socket.io').listen(server);
 //var socket = require('socket.io').listen(app);
 io.sockets.on('connection', function(socket) {
   socket.on('start', function(data) {
-    socket.emit("start", {
+    var data = {
       userId: socket.handshake.userId,
       data:data
-    });
+    };
+    socket.emit("start", data);
+    socket.broadcast.emit("start", data);
   });
   socket.on('move', function(data) {
-    socket.broadcast.emit("move", {
+    var data = {
       userId: socket.handshake.userId,
       data:data
-    });
+    };
+    socket.emit("move", data);
+    socket.broadcast.emit("move", data);
   });
 });

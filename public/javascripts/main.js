@@ -45,8 +45,6 @@
         element.event.pointmove(function(e) {
             if (!touch) { return ; }
 
-            canvas.strokeStyle = color;
-            canvas.drawLine(x, y, e.pointX, e.pointY);
             send("move", x, y, e.pointX, e.pointY, color);
             x = e.pointX; y = e.pointY;
 
